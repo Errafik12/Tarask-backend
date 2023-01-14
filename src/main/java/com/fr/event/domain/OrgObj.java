@@ -15,5 +15,5 @@ public class OrgObj {
     public Integer capacity;
     public String outdoors;
     public int age_limit;
-    public String property;
+  
 }

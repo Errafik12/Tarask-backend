@@ -36,13 +36,12 @@ public class EventRepositoryImpl implements EventRepository {
         namedParameterJdbcTemplate.update(query, param);
 
         Map<String, Object> paramOrg = new HashMap<>();
-        String queryOrg = "insert into organisation (eventId, date, capacity, outdoors, age_limit, property) VALUE (:eventId, :date, :capacity, :outdoors, :age_limit, :property)";
+        String queryOrg = "insert into organisation (eventId, date, capacity, outdoors, age_limit) VALUE (:eventId, :date, :capacity, :outdoors, :age_limit)";
         paramOrg.put("eventId", event.getEventId());
         paramOrg.put("date", event.getOrgObj().getDate());
         paramOrg.put("capacity", event.getOrgObj().getCapacity());
         paramOrg.put("outdoors", StringUtils.upperCase(StringUtils.trim(event.getOrgObj().getOutdoors())));
         paramOrg.put("age_limit", event.getOrgObj().getAge_limit());
-        paramOrg.put("property", StringUtils.upperCase(StringUtils.trim(event.getOrgObj().getProperty())));
         namedParameterJdbcTemplate.update(queryOrg, paramOrg);
 
         Map<String, Object> paramAdd = new HashMap<>();
@@ -85,7 +84,6 @@ public class EventRepositoryImpl implements EventRepository {
         orgObj.setCapacity(rs.getInt("capacity"));
         orgObj.setOutdoors(rs.getString("outdoors"));
         orgObj.setAge_limit(rs.getInt("age_limit"));
-        orgObj.setProperty(rs.getString("property"));
         event.setOrgObj(orgObj);
 
         addressObj.setNumber(rs.getInt("number"));
@@ -109,13 +107,12 @@ public class EventRepositoryImpl implements EventRepository {
         namedParameterJdbcTemplate.update(query, params);
 
         Map<String, Object> updateOrg = new HashMap<>();
-        String queryOrg = "UPDATE organisation SET date = (:date), capacity = (:capacity), outdoors = (:outdoors), age_limit = (:age_limit), property = (:property) WHERE eventId = (:eventId)";
+        String queryOrg = "UPDATE organisation SET date = (:date), capacity = (:capacity), outdoors = (:outdoors), age_limit = (:age_limit) WHERE eventId = (:eventId)";
         updateOrg.put("eventId", event.getEventId());
         updateOrg.put("date", event.getOrgObj().getDate());
         updateOrg.put("capacity", event.getOrgObj().getCapacity());
         updateOrg.put("outdoors", StringUtils.upperCase(StringUtils.trim(event.getOrgObj().getOutdoors())));
         updateOrg.put("age_limit", event.getOrgObj().getAge_limit());
-        updateOrg.put("property", StringUtils.upperCase(StringUtils.trim(event.getOrgObj().getProperty())));
         namedParameterJdbcTemplate.update(queryOrg, updateOrg);
 
         Map<String, Object> updateAdd = new HashMap<>();

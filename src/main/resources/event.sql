@@ -45,7 +45,6 @@ create table organisation
     capacity  integer      NOT NULL,
     outdoors  varchar(255),
     age_limit integer,
-    property  varchar(255) NOT NULL,
     CONSTRAINT pk_org PRIMARY KEY (eventId),
     CONSTRAINT fk_org FOREIGN KEY (eventId) REFERENCES event (eventId)
 );
